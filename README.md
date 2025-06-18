@@ -1,6 +1,6 @@
-## Go
+# Go
 
-# boot.dev
+## boot.dev: Learn Go
 
 This repository is to document my learning journey for golang
 
