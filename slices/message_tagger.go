@@ -12,12 +12,12 @@ type sms struct {
 
 func tagMessages(messages []sms, tagger func(sms) []string) []sms {
 	var tags []string
-	for _, sms := range messages {
+	for i, sms := range messages {
 		tags = tagger(sms)
 		if tags == nil {
 			tags = []string{}
 		}
-		sms.tags = tags
+		messages[i].tags = tags
 	}
 	return messages
 }
