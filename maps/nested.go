@@ -4,17 +4,18 @@ func getNameCounts(names []string) map[rune]map[string]int {
 	nameCounts := map[rune]map[string]int{}
 
 	for _, name := range names {
-		nameRune := []rune(name)[0]           // b
-		runeNames, ok := nameCounts[nameRune] // { billy: 1 }
-		if !ok {                              // if it doesn't exist, it initializes a rune key with a map
+		nameRune := []rune(name)[0]
+		/*
+		 Making this more concise and removing unecessary variable
+		*/
+		if _, ok := nameCounts[nameRune]; !ok {
 			nameCounts[nameRune] = map[string]int{}
-			runeNames = nameCounts[nameRune]
 		}
-		_, ok = runeNames[name] // checking if name already exists
-		if !ok {
-			runeNames[name] = 0 // if it doesn't exist, it initializes the name key with a 0 count
-		}
-		runeNames[name] += 1
+		/*
+		 Initilizing the name map with 0 is unnecesarry since the default,
+		 value returned is 0 if the key does not exist, so I can just increment
+		*/
+		nameCounts[nameRune][name]++
 	}
 	return nameCounts
 }
