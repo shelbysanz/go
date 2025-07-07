@@ -24,17 +24,19 @@ type transaction struct {
 
 // Don't touch above this line
 
-func updateBalance(customer *customer, transaction transaction) error {
-	if transaction.transactionType == "deposit" {
-		customer.balance += transaction.amount
+func updateBalance(c *customer, t transaction) error {
+	switch t.transactionType {
+	case transactionDeposit:
+		c.balance += t.amount
 		return nil
-	} else if transaction.transactionType == "withdrawal" {
-		if customer.balance < transaction.amount {
+	case transactionWithdrawal:
+		if c.balance < t.amount {
 			return errors.New("insufficient funds")
+		} else {
+			c.balance -= t.amount
+			return nil
 		}
-		customer.balance -= transaction.amount
-		return nil
-	} else {
+	default:
 		return errors.New("unknown transaction type")
 	}
 }
