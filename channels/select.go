@@ -13,12 +13,12 @@ func logMessages(chEmails, chSms chan string) {
 			if !ok {
 				return
 			}
-			fmt.Println(e)
+			logEmail(e)
 		case s, ok := <-chSms:
 			if !ok {
 				return
 			}
-			fmt.Println(s)
+			logSms(s)
 		}
 	}
 }
